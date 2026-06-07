@@ -1,0 +1,1 @@
+F:/Apps/api-openobserve/docs/mcp-openobserve-spec.md

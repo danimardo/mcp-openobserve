@@ -1,0 +1,1 @@
+F:/Apps/api-openobserve/docs/manual-de-integracion.md
