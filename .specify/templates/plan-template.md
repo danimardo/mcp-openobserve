@@ -40,7 +40,22 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- **Gateway-only, read-only MCP**: Plan confirms the feature consumes only Log
+  Gateway API read endpoints and does not call OpenObserve directly.
+- **Contract-first integration**: Plan references the active feature spec under
+  `specs/` and `docs/openapi.yaml`; `docs/historias.md` is used as customer
+  context, and contract conflicts are resolved before implementation.
+- **Test-first quality**: Plan defines failing-first tests and coverage gates
+  for unit, contract, integration, and secret-redaction behavior.
+- **Agent ergonomics and local-logs first**: Plan documents when agents should
+  use local logs versus MCP tools.
+- **Security and least privilege**: Plan confirms no secret exposure, no SQL
+  inputs, no write tools, bounded pagination, bounded fan-out, and timeout usage.
+- **Logging and debugging standard**: Plan uses the shared logger wrapper only,
+  forbids direct console usage, sets `LOG_LEVEL`/`PUBLIC_LOG_LEVEL` behavior,
+  proves redaction, and keeps MCP stdio logs off stdout.
+- **Technology baseline**: Plan uses the constitution-approved runtime,
+  dependencies, module system, and repository structure.
 
 ## Project Structure
 

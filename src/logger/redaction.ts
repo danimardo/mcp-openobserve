@@ -1,0 +1,15 @@
+export const REDACT_PATHS: string[] = [
+  'authorization',
+  'headers.authorization',
+  'headers.Authorization',
+  'apiKey',
+  'api_key',
+  'password',
+  'token',
+  'secret',
+  '*.authorization',
+  '*.token',
+  '*.password',
+  '*.apiKey',
+  '*.api_key',
+];

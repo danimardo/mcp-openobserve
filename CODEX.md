@@ -1,9 +1,12 @@
+# Instrucciones para Codex y Cursor — mcp-openobserve
 
-<!-- MANUAL ADDITIONS START -->
+Este fichero define las instrucciones de trabajo para OpenAI Codex, Cursor y agentes compatibles que colaboren en este proyecto.
+
+---
 
 ## Idioma y comunicación
 
-Comunícate siempre en español. Escribe todas las instrucciones, comentarios, mensajes de error orientados al desarrollador y outputs en español. Los identificadores de código, nombres de variables, nombres de fichero y términos técnicos de la industria se mantienen en su forma original (inglés técnico).
+Comunícate siempre en español. Escribe todas las instrucciones, comentarios, mensajes y outputs en español. Los identificadores de código, nombres de variables, nombres de fichero y términos técnicos de la industria se mantienen en su forma original (inglés técnico).
 
 ---
 
@@ -44,7 +47,7 @@ Antes de implementar cualquier cambio, lee y respeta estos ficheros en orden de 
 
 ## Documentación obligatoria al finalizar cada tarea
 
-- Cualquier cambio en el código que altere un comportamiento observable **debe reflejarse en `spec.md`** antes de dar la tarea por terminada.
+- Cualquier cambio en el código que altere un comportamiento observable **debe reflejarse en `specs/001-mcp-log-gateway/spec.md`** antes de dar la tarea por terminada.
 - Esto incluye: correcciones de bugs que cambian comportamiento, ajustes de lógica, nuevas métricas, cambios en reglas de negocio y correcciones de campo.
 - Solo se puede omitir la actualización del spec cuando el cambio es puramente interno y no altera ningún comportamiento observable (por ejemplo: renombrar una variable local o reformatear código).
 - La regla es: **documenta siempre, salvo que el cambio sea invisible para el usuario**. La excepción es la que requiere justificación, no la documentación.
@@ -53,15 +56,15 @@ Antes de implementar cualquier cambio, lee y respeta estos ficheros en orden de 
 
 ## Consulta de documentación técnica
 
-- Para implementar código que use librerías, frameworks o APIs del stack del proyecto, utiliza el **MCP Context7** para consultar la documentación más reciente.
-- Asegúrate de que la implementación use la sintaxis moderna y cumpla con las versiones fijadas en la constitución.
-- No asumas que tu conocimiento de entrenamiento refleja la versión exacta instalada.
+- Para implementar código que use librerías, frameworks o APIs del stack del proyecto, consulta siempre la documentación oficial más reciente de la versión instalada.
+- Las versiones exactas del stack están fijadas en `.specify/memory/constitution.md` en la sección "Technology Baseline and Versions".
+- No asumas que el conocimiento de entrenamiento refleja la versión exacta instalada.
 
 ---
 
 ## Commits y operaciones Git
 
-- Para commits y operaciones con GitHub, usa la CLI `gh` instalada en el sistema en lugar de comandos `git` directamente cuando sea posible.
+- Para commits y operaciones con GitHub, usa la CLI `gh` instalada en el sistema cuando sea posible.
 - Nunca hagas push a `main` directamente. Trabaja siempre en la rama de feature activa (`001-mcp-log-gateway`).
 - Antes de hacer un commit, verifica que `npm run lint`, `npm run typecheck` y `npm test` pasan.
 
@@ -89,5 +92,3 @@ El código de la aplicación **nunca debe usar `console.*` directamente**. Usa s
 Los logs ya redactan secretos, tokens, credenciales, cookies, cabeceras de autorización e identificadores de sesión. Aun así, nunca copies datos sensibles de los logs a respuestas, commits, documentación o código generado.
 
 Al añadir nuevas funcionalidades, asegúrate de que los eventos operativos relevantes se registran a través del contrato del logger compartido y de que activar el nivel `debug` proporciona valor diagnóstico real.
-
-<!-- MANUAL ADDITIONS END -->
