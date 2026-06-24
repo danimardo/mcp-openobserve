@@ -21,7 +21,7 @@ function waitForExit(proc: ReturnType<typeof spawn>, timeoutMs = 5000): Promise<
       proc.kill();
       resolve(null);
     }, timeoutMs);
-    proc.on('exit', (code) => {
+    proc.on('close', (code) => {
       clearTimeout(timer);
       resolve(code);
     });

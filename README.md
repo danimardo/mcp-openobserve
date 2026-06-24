@@ -1,8 +1,29 @@
-# mcp-openobserve
+# 🚀 MCP Log Gateway para OpenObserve (Log Gateway API)
 
-Servidor MCP de solo lectura que conecta agentes de inteligencia artificial con un **Log Gateway API** centralizado. Los agentes invocan herramientas MCP y el servidor las traduce en peticiones HTTP autenticadas al gateway, devolviendo los logs almacenados de forma estructurada y lista para ser consumida por cualquier LLM.
+Un servidor del **Model Context Protocol (MCP)** de solo lectura que actúa como un puente inteligente y seguro entre tus asistentes de Inteligencia Artificial (Claude, Gemini, GPT, etc.) y un **Log Gateway API** centralizado.
 
-> **¿Qué hace este MCP?** Permite a Claude, GPT, Gemini y cualquier agente IA consultar, filtrar, buscar y analizar logs de aplicaciones distribuidas sin acceder directamente a OpenObserve ni a ningún sistema de almacenamiento interno. Es un intermediario seguro, de solo lectura, que respeta los permisos de cada API key.
+Este servidor permite que la IA consulte, filtre, busque y analice los logs de tus aplicaciones distribuidas directamente desde la interfaz del chat o el terminal, eliminando la necesidad de interactuar manualmente con complejas consolas de observabilidad.
+
+---
+
+## 💡 ¿Por qué existe este proyecto y qué problemas resuelve?
+
+Cuando trabajamos con asistentes de IA en tareas de depuración, desarrollo o soporte, el flujo tradicional para investigar problemas suele ser ineficiente y fragmentado:
+
+1. **La fatiga del "copiar y pegar"**: Tienes que salir de tu editor de código o chat, abrir el navegador, loguearte en OpenObserve u otra consola de logs, redactar consultas SQL o filtros complejos, copiar las líneas de logs y volver al chat para pegarlas.
+2. **Brechas de seguridad**: Compartir credenciales maestras de bases de datos o tokens de administración de OpenObserve con el modelo de IA o en archivos de configuración locales es un riesgo alto.
+3. **Falta de contexto distribuido**: Correlacionar logs entre múltiples microservicios requiere consultar varias pantallas, buscar manualmente por identificadores de traza (`trace_id` o `request_id`) y ordenar cronológicamente la información.
+
+### 🌟 ¿Para qué sirve y en qué te ayuda en tu día a día?
+
+* **Depuración interactiva sin fricciones**: Simplemente pregúntale a la IA: *"¿Por qué está fallando el servicio de pagos?"* o *"Busca logs de error de payments_api en la última hora"*. La IA usará el MCP para consultar el Log Gateway de forma automática y autónoma.
+* **Correlación automática (Fan-Out)**: Si le das un `request_id` o `trace_id`, el MCP interrogará de forma paralela y controlada a todos los servicios autorizados y compondrá un flujo temporal limpio de lo que ocurrió a través de toda tu arquitectura distribuida.
+* **Agrupación y resumen inteligente**: La herramienta `summarize_errors` permite consolidar y contar errores idénticos o similares, permitiéndote priorizar las incidencias reales sin ahogarte en miles de líneas repetidas de logs redundantes.
+* **Seguridad y privacidad por diseño**:
+  * **Acceso acotado**: El servidor solo permite operaciones de lectura (`GET`). No hay herramientas de escritura, modificación o borrado de logs.
+  * **Aislamiento**: El servidor nunca interactúa con OpenObserve directamente. Todo pasa por el Log Gateway API usando un token Bearer específico para el entorno.
+  * **Redacción automática**: El sistema de logs del servidor y las respuestas del MCP redactan automáticamente API keys, passwords, session tokens y cualquier cabecera `Authorization` para que nunca se guarden ni expongan.
+* **Ergonomía de agentes**: Ayuda a la IA a seguir la política de **"logs locales primero"**: si el error es local y reproducible, revisará los archivos locales del proyecto antes de consultar el gateway histórico para reducir costes y latencia.
 
 ---
 
